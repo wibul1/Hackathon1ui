@@ -1,0 +1,39 @@
+<div class="box">
+    
+    <div class="box-button">
+        <button class="Add-zone" (click)="openModal()">Add Zone</button>
+    </div>
+    <app-datatable
+    [data]="zoneData"
+    [columns]="zoneColumns"
+    [actionButtons]="[
+      { mode: 'EDIT', label: 'แก้ไข', class: 'btn btn-sm btn-warning me-1' },
+      { mode: 'DELETE', label: 'ลบ', class: 'btn btn-sm btn-danger' }
+    ]"
+    (actionFunction)="onDatatableFunction($event)"
+    [loading]="isLoading">
+  </app-datatable>
+  
+  </div>
+  
+
+  <div class="popup-overlay" *ngIf="showModal">
+    <div class="popup">
+      <h2>จองต่อเวลา</h2>
+      <form [formGroup]="myFormpopup" (ngSubmit)="OnSave()">
+        <div class="time-picker">
+            <app-text-box 
+            [label]="'Zone Name'" 
+            [type]="'text'" 
+            formControlName="zoneName"
+            [column]="'12'">
+          </app-text-box>
+        </div>
+
+        <div class="popup-buttons">
+          <button type="button" (click)="closeModalPopup()">ยกเลิก</button>
+          <button type="submit">ยืนยัน</button>
+        </div>
+      </form>
+    </div>
+  </div>

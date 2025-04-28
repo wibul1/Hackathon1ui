@@ -1,0 +1,69 @@
+<div class="box">
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div class="search">
+      <div class="grid-container">
+        <app-text-box 
+          [label]="'Search vlue'" 
+          [type]="'select'" 
+          [options]="zoneOptions"
+          formControlName="zone_id"
+          [column]="'12'">
+        </app-text-box>
+        <app-text-box 
+          [label]="'Status'" 
+          [type]="'text'" 
+          formControlName="status"
+          [column]="'8'">
+        </app-text-box>
+      </div>
+
+      <button class="button-search" type="submit">search</button>
+      <button class="button-clear" type="button" (click)="onClear()">clear</button>
+    </div>
+  </form>
+      ตอนนี้ทำ add search ไปแล้ว
+        ต่อไปทำ add zone room หรือก็คือหน้า admin และป๊อบอัพแจ้งเตือนต่างๆ
+  <div class="bodyroom"> 
+    <app-room-card
+      *ngFor="let room of rooms"
+      [zone]="room.zoneName"
+      [room]="room.roomNumber"
+      [status]="room.status === 'A' ? 'ไม่ว่าง' : 'ว่าง'"
+      [time]="room.timeFrom && room.timeTo ? (room.timeFrom + '-' + room.timeTo) : '-'"
+      [rawStatus]="room.status"
+      class="room"
+      (onReserve)="handleReserve(room)">
+    </app-room-card>
+  </div>
+</div>
+
+<!-- Popup Modal -->
+<div class="popup-overlay" *ngIf="showModal">
+  <div class="popup">
+    <h2>จองต่อเวลา</h2>
+    <form [formGroup]="myFormpopup" (ngSubmit)="confirmReservation()">
+      <div class="time-picker">
+        <app-text-box 
+          [label]="'เวลาเริ่ม'" 
+          [type]="'select'" 
+          [options]="timeOptions" 
+          formControlName="timeFrom"
+          [column]="'12'">
+        </app-text-box>
+      </div>
+      <div class="time-picker">
+        <app-text-box 
+          [label]="'เวลาเสร็จ'" 
+          [type]="'select'" 
+          [options]="timeOptions" 
+          formControlName="timeTo"
+          [column]="'12'">
+        </app-text-box>
+      </div>
+      <div class="popup-buttons">
+        <button type="button" (click)="closeModal()">ยกเลิก</button>
+        <button type="submit">ยืนยัน</button>
+      </div>
+    </form>
+  </div>
+</div>

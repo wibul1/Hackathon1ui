@@ -1,0 +1,28 @@
+<div [ngStyle]="{ width: getWidth() }" style="margin-bottom: 1rem;">
+  <label style="display: block; margin-bottom: 5px;">{{ label }}</label>
+
+  <div style="display: flex; align-items: center; gap: 0.5rem;">
+    <ng-container *ngIf="type !== 'select'; else selectField">
+      <input
+        #inputRef
+        [type]="type"
+        [value]="value"
+        [disabled]="disabled"
+        [placeholder]="placeholder"
+        (input)="onInputChange($event)"
+        style="padding: 8px; border: 1px solid #ccc; border-radius: 6px; flex: 1;"
+      />
+    </ng-container>
+
+    <ng-template #selectField>
+      <select
+        [disabled]="disabled"
+        [ngModel]="value"
+        (ngModelChange)="onSelectChange($event)"
+        style="padding: 8px; border: 1px solid #ccc; border-radius: 6px; flex: 1;">
+        <option value="">-- กรุณาเลือก --</option>
+        <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </ng-template>
+  </div>
+</div>

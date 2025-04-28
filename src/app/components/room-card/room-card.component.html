@@ -1,0 +1,12 @@
+<div style="background-color: lightgray; padding: 20px; border-radius: 12px; width: 200px; text-align: center;">
+  <div>โซน : {{ zone }}</div>
+  <div>ห้อง : {{ room }}</div>
+  <div>สถานะ : {{ status }}</div>
+  <div>เวลา : {{ time }}</div>
+  <button 
+    (click)="reserve()" 
+    style="margin-top: 12px; padding: 5px 10px;"
+  >
+    {{ rawStatus === 'A' ? 'จองต่อ' : 'จอง' }}
+  </button>
+</div>
