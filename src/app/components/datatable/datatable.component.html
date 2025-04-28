@@ -1,0 +1,25 @@
+<div *ngIf="loading">กำลังโหลด...</div>
+
+<table class="table table-bordered" *ngIf="!loading">
+  <thead>
+    <tr>
+      <th *ngIf="hasActionColumn">Action</th>
+      <th *ngFor="let col of columns">{{ col.header }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data">
+      <td *ngIf="hasActionColumn">
+        <button *ngFor="let btn of actionButtons"
+                [ngClass]="btn.class"
+                (click)="onAction(btn.mode, item)">
+          {{ btn.label }}
+        </button>
+      </td>
+      <td *ngFor="let col of columns">
+        {{ item[col.field] }}
+      </td>
+      
+    </tr>
+  </tbody>
+</table>

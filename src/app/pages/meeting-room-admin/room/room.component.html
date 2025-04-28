@@ -1,0 +1,67 @@
+<div class="box">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <div class="search">
+        <div class="grid-container">
+          <app-text-box 
+            [label]="'Search vlue'" 
+            [type]="'select'" 
+            [options]="zoneOptions"
+            formControlName="zone_id"
+            [column]="'12'">
+          </app-text-box>
+          <app-text-box 
+            [label]="'Status'" 
+            [type]="'text'" 
+            formControlName="status"
+            [column]="'8'">
+          </app-text-box>
+        </div>
+  
+        <button class="button-search" type="submit">search</button>
+        <button class="button-clear" type="button" (click)="onClear()">clear</button>
+      </div>
+    </form>
+    <div class="box-button">
+        <button class="Add-room" (click)="openModal()">Add room</button>
+    </div>
+    <app-datatable
+    [data]="roomData"
+    [columns]="roomColumns"
+    [actionButtons]="[
+      { mode: 'EDIT', label: 'แก้ไข', class: 'btn btn-sm btn-warning me-1' },
+      { mode: 'DELETE', label: 'ลบ', class: 'btn btn-sm btn-danger' }
+    ]"
+    (actionFunction)="onDatatableFunction($event)"
+    [loading]="isLoading">
+  </app-datatable>
+  
+  </div>
+  
+
+  <div class="popup-overlay" *ngIf="showModal">
+    <div class="popup">
+      <h2>จองต่อเวลา</h2>
+      <form [formGroup]="myFormpopup" (ngSubmit)="OnSave()">
+        <div class="time-picker">
+            <app-text-box 
+            [label]="'Room Name'" 
+            [type]="'text'" 
+            formControlName="roomName"
+            [column]="'12'">
+          </app-text-box>
+            <app-text-box 
+            [label]="'Zone'" 
+            [type]="'select'" 
+            [options]="zoneOptions"
+            formControlName="zone_id"
+            [column]="'12'">
+          </app-text-box>
+        </div>
+
+        <div class="popup-buttons">
+          <button type="button" (click)="closeModalPopup()">ยกเลิก</button>
+          <button type="submit">ยืนยัน</button>
+        </div>
+      </form>
+    </div>
+  </div>

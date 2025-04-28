@@ -1,0 +1,44 @@
+<div class="sidebar" [ngClass]="{'open': isMenuOpen}">
+    <div class="menu-icon" (click)="toggleMenu()">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+    
+    <div class="menu-content">
+      <ul>
+        <li (click)="goToHome()">
+          <i class="icon">🏠</i>
+          <span [ngClass]="{'visible': isMenuOpen}">Home</span>
+        </li>
+        <!-- Bill Dropdown Menu -->
+        <li (click)="toggleBillMenu()" class="dropdown">
+          <div class="dropdown-header">
+            <i class="icon">💼</i>
+            <span [ngClass]="{'visible': isMenuOpen}">Meeting Room</span>
+            <i class="dropdown-icon" [ngClass]="{'rotate': isBillMenuOpen}"></i>
+          </div>
+        
+          <ul *ngIf="isBillMenuOpen" class="dropdown-menu">
+            <li (click)="goToRoomList()"> Room List</li>
+            
+          </ul>
+        </li>
+        <li (click)="toggleBillMenu()" class="dropdown">
+          <div class="dropdown-header">
+            <i class="icon">💼</i>
+            <span [ngClass]="{'visible': isMenuOpen}">Admin Meeting Room</span>
+            <i class="dropdown-icon" [ngClass]="{'rotate': isBillMenuOpen}"></i>
+          </div>
+        
+          <ul *ngIf="isBillMenuOpen" class="dropdown-menu">
+            <li (click)="goToRoom()"> Room</li>
+            <li (click)="goToZone()"> Zone</li>
+            <li (click)="goToReserveRoom()"> Reserve Room</li>
+          </ul>
+        </li>
+  
+      </ul>
+    </div>
+  </div>
+  
